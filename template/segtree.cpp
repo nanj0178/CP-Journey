@@ -54,11 +54,11 @@ struct Seg{
         _edit(LLIMIT, RLIMIT, 1, p, v);
     }
     // binary search
-    bool good(Data x, Qdata &v) {
+    bool _good(Data x, Qdata &v) {
         return x >= v;
     }
     int _search(int L, int R, int id, Qdata &v) {
-        if(!good(node[id], v)) return -1;
+        if(!_good(node[id], v)) return -1;
         if(L == R) return L;
         int mm = (L + R) / 2;
         int ret = _search(L, mm, 2 * id, v);
