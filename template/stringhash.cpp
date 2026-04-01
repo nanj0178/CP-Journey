@@ -1,6 +1,15 @@
 #include <bits/stdc++.h>
 using namespace std;
 using LL = long long;
+/* 
+rng settings:
+// int
+mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+uniform_int_distribution<int>(0, INT_MAX)(rng)
+// long long
+mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
+uniform_int_distribution<long long>(0, LONG_LONG_MAX)(rng);
+*/
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 const LL M = 991831889;
 const LL C = uniform_int_distribution<LL>(0.1 * M, 0.9 * M)(rng);
