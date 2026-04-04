@@ -19,17 +19,24 @@ struct HashString {
     int n;
     vector<LL> pows, sums;
 
-    HashString(string &s) : n(s.size()), pows(n + 1, 1), sums(n + 1) {
-        for (int i = 1; i <= n; i++) {
-            pows[i] = pows[i - 1] * C % M;
-            sums[i] = (sums[i - 1] * C + s[i - 1]) % M;
+    HashString(string &s) : n(s.size()), pows(n + 1, 1), sums(n + 1, 0) {
+        for (int i = 0; i < n; i++) {
+            pows[i + 1] = pows[i] * C % M;
+            sums[i + 1] = (sums[i] * C + s[i]) % M;
         }
     }
 
+    /*
+        quick recall
+        len(s) = 3
+        sum[r] = C^2 * s0 + C^1 * s1 + s2
+        pow[i] = the shift length should be mul
+        hash(1, 3) => want C^1 * s1 + s2 => sum[r] - sum[l] * shift len
+    */
     // Returns the hash of the substring [l, r)
     // get hash of the string s, call hash(0, n)
     LL hash(int l, int r) {
-        LL h = sums[r] - sums[l] * pows[r - l];
+        LL h = sums[r] - sums[l] * pows[r - l] % M;
         return (h % M + M) % M;
     }
 };
