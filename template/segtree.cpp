@@ -53,7 +53,7 @@ struct Seg{
         return Trait::merge(_qq(L, mm, id * 2, l, r), _qq(mm, R, id * 2 + 1, l, r));
     }
     Data query(int l, int r) {
-        assert(l < r);
+        if (l >= r) return Trait::default_value();
         return _qq(0, _n, 1, l, r);
     }
     void _edit(int L, int R, int id, int p, Data v) {
