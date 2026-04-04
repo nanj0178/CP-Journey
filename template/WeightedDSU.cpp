@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+// 0-based
 struct WeightedDSU {
     vector<int> par;
     vector<int> groupSize;
@@ -41,10 +42,10 @@ struct WeightedDSU {
         return true;
     }
     void init(int n) {
-        par.assign(n + 1, 0);
+        par.assign(n, 0);
         iota(par.begin(), par.end(), 0); // assign 0,1,2,3,4,5...
-        groupSize.assign(n + 1, 1);
-        releation.assign(n + 1, 0);
-        color_cnt.assign(n + 1, {1, 0});        
+        groupSize.assign(n, 1);
+        releation.assign(n, 0);
+        color_cnt.assign(n, {1, 0});        
     }
 };
