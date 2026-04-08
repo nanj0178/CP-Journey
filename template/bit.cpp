@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-
 template <typename T>
 struct BIT {
     int _n;
@@ -10,9 +9,9 @@ struct BIT {
     // 1-based
     void add(int x, T v) {
         assert(x >= 0 && x < _n);
-        p++; 
-        for(; x <= _n; x += p & -p) {
-            tree[p] += x;
+        x++; 
+        for(; x <= _n; x += x & -x) {
+            tree[x] += v;
         }
     }
 
@@ -27,7 +26,7 @@ struct BIT {
 
     // [l, r)
     T query(int l, int r) {
-        assert(l < r);
+        if (l >= r) return 0;
         return _query(r) - _query(l);
     }
 };
