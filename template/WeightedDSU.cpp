@@ -31,7 +31,7 @@ struct WeightedDSU {
         }
         par[px] = py;
         groupSize[py] += groupSize[px];
-        releation[px] = releation[x] ^ v ^ releation[y];
+        releation[py] = releation[x] ^ v ^ releation[y];
         if (v == 0) {
             color_cnt[py][0] += color_cnt[px][0];
             color_cnt[py][1] += color_cnt[px][1];

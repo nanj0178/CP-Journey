@@ -82,8 +82,8 @@ struct LazySeg {
         
         _push(id);
         int mm = L + (R - L) / 2;
-        if(r <= mm) _update(L, mm, id * 2, l, r, v);
-        if(l >= mm) _update(mm, R, id * 2 + 1, l, r, v);
+        if(l < mm) _update(L, mm, id * 2, l, r, v);
+        if(r > mm) _update(mm, R, id * 2 + 1, l, r, v);
         _pull(id);
     }
 
