@@ -106,7 +106,7 @@ struct LazySeg {
     }
 
     Data query(int l, int r) {
-        if (l >= r) return Trait::default_value();
+        if (l >= r) return Trait::default_data();
         return _qq(0, _n, 1, l, r);
     }
 
