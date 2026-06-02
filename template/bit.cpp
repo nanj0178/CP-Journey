@@ -15,6 +15,7 @@ struct BIT {
     }
 
     T _query(int x) {
+        assert(x <= _n);
         T s = 0;
         for(; x > 0; x -= x & -x) {
             s += tree[x];
