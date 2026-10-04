@@ -1,4 +1,6 @@
 #include <bits/stdc++.h>
+using namespace std;
+using LL = long long;
 int MOD = 998244353;
 
 struct mi {
@@ -30,3 +32,24 @@ mi inv(mi a) {
 	return pow(a, MOD - 2);
 }
 mi operator/(mi a, mi b) { return a * inv(b); }
+
+array<LL,3> extgcd(LL a, LL b) {
+	// a * x1 + b * y1​ = g
+	// b * x2 + (a % b) * y1​ = g
+	// set a % b = a − a / b * b
+	// => b * x2 + (a − a / b * b) * y2 = g
+    // => b * x2 + a * y2 - a / b * b * y2 = g
+	// => a * y2 + b (x2 - a / b * y2) = g
+	// => x1 = y2
+	// => y1 = (x2 - a / b * y2)
+    if (b == 0) {
+        return {a, 1, 0};
+    }
+
+    auto [g, x1, y1] = extgcd(b, a % b);
+
+    LL x = y1;
+    LL y = x1 - (a / b) * y1;
+
+    return {g, x, y};
+}

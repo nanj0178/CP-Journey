@@ -1,5 +1,65 @@
 #include <bits/stdc++.h>
 using namespace std;
+struct SCC {
+    vector<vector<int>> G;
+    vector<int> dfn, up;
+    vector<bool> instk;
+    vector<vector<int>> sccgroup;
+    vector<int> sccid;
+    stack<int> st;
+    int dfnid = 0;
+    int sz;
+    SCC(int n) {
+        sz = n;
+        G.assign(n, {});
+        dfn.assign(n, 0);
+        up.assign(n, 0);
+        instk.assign(n, 0);
+        sccgroup.clear();
+        sccid.assign(n, 0);
+        dfnid = 0;
+    }
+    void addE(int x, int y) {
+        G[x].push_back(y);
+    }
+    void Exec() {
+        for(int i = 0; i < sz; i++) {
+            if (dfn[i] == 0) {
+                tarjan(i);
+            }
+        }    
+        reverse(sccgroup.begin(), sccgroup.end());
+        for(int i = 0;i < sccgroup.size(); i++) {
+            for(auto p : sccgroup[i]) {
+                sccid[p] = i + 1;
+            }
+        }
+    }
+    void tarjan(int cur) {
+        dfn[cur] = up[cur] = ++dfnid;
+        st.push(cur);
+        instk[cur] = true;
+        for(int next : G[cur]) {
+            if (dfn[next] && instk[next] == false) continue;
+            if (dfn[next] == 0) tarjan(next);
+            up[cur] = min(up[cur], up[next]);
+        }
+        if (up[cur] == dfn[cur]) {
+            vector<int> groups;
+            int p = 0;
+            while(true) {
+                p = st.top(); st.pop();
+                groups.push_back(p);
+                instk[p] = false;
+                if (p == cur) {
+                    break;
+                }
+            }
+            sccgroup.push_back(groups);
+        }
+    }
+};
+/*
 const int SIZE = 200001;
 vector<vector<int>> G;
 vector<int> dfn;
@@ -99,6 +159,6 @@ void solve() {
         }
     }
     cout << ans << "\n";
-}
+} */
 // vertex id is 1-based.
 // todo: update to struct or class
