@@ -1,3 +1,4 @@
+// template code is uploaded to https://github.com/nanj0178/CP-Journey
 // TLE:
 //   - check1: due to O(MAX_V) initialization overhead on a large number of small test cases, instead of being linear to N.
 // No Idea checklist:

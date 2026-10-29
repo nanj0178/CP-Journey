@@ -67,3 +67,41 @@ auto check = [](LL x1, LL y1, LL w1, LL h1, LL x2, LL y2, LL w2, LL h2) {
     return true;
     // return (min(xx1, xx2) - max(x1, x2) + 1) * (min(yy1, yy2) - max(y1, y2) + 1); // 算size，沒驗證過
 };
+
+vector<Point> getConvexHull(vector<Point> &A) {
+    sort(A.begin(), A.end());
+    vector<Point> vex;
+    for(int t = 0; t < 2; t++) {
+        int base = vex.size();
+        for(auto p : A) {
+            while(vex.size() - base >= 2) {
+                Point last2 = vex[vex.size() - 2]; 
+                Point last1 = vex[vex.size() - 1];
+                if (cross(last1 -  last2, p - last2) < 0) {
+                    vex.pop_back();
+                } else {
+                    break;
+                }
+            }
+            vex.push_back(p);
+        }
+        vex.pop_back();
+        reverse(A.begin(), A.end());
+    }
+    return vex;
+}
+// Sort points by polar angle and use cross instead of atan2l
+/*
+    auto half = [&] (Point x) {
+        // 0 is up, 1 is down.
+        return (x.Y < 0) || (x.Y == 0 && x.X < 0);
+    };
+    auto cmp = [&](Point a, Point b) {
+        int ha = half(a);
+        int hb = half(b);
+        if (ha != hb) return ha < hb;
+        LL c = cross(a, b);
+        if (c != 0) return c > 0;
+        return abs2(a) < abs2(b);
+    };
+*/
